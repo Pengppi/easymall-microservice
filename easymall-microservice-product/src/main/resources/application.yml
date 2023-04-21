@@ -1,0 +1,36 @@
+server:
+  port: 10001
+spring:
+  application:
+    name: productservice
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://172.66.0.66:3306/easydb?useSSL=false
+      username: root
+      password: abc123
+      max-active: 200
+#      max-idle: 8
+      initial-size: 5
+      min-idle: 3
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      table-prefix: t_
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.easymall.pojo
+
+#mybatis-plus:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.easymall.pojo
+
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        - http://localhost:8761/eureka
+        - http://localhost:8762/eureka
