@@ -1,21 +1,15 @@
 server:
-  port: 11000
+  port: 10003
 spring:
   application:
-    name: configserver
+    name: userservice
   cloud:
     config:
-      server:
-        git:
-          uri: https://gitee.com/neowest/easymall-config
-#          uri: https://gitee.com/xushuona/emconfig
-#          search-paths: /test
-#          search-paths: /xutest
       label: master
+      name: datasource,redis
       discovery:
         enabled: true
         service-id: configserver
-
 eureka:
   client:
     service-url:
