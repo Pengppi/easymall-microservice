@@ -14,23 +14,23 @@ spring:
       initial-size: 5
       min-idle: 3
   redis:
-#    host: 172.66.0.66
-#    port: 6379
-#    database: 0
+    host: 172.66.0.66
+    port: 6379
+    database: 0
     jedis:
       pool:
         max-active: 50
         max-wait: 1ms
         max-idle: 8
         min-idle: 0
-    cluster:
-      nodes:
-        - 172.66.0.66:7001
-        - 172.66.0.66:7002
-        - 172.66.0.66:7003
-        - 172.66.0.66:8001
-        - 172.66.0.66:8002
-        - 172.66.0.66:8003
+#    cluster:
+#      nodes:
+#        - 172.66.0.66:7001
+#        - 172.66.0.66:7002
+#        - 172.66.0.66:7003
+#        - 172.66.0.66:8001
+#        - 172.66.0.66:8002
+#        - 172.66.0.66:8003
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true

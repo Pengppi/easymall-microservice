@@ -12,6 +12,7 @@ import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.easymall.pojo.User;
 import com.easymall.utils.MD5Util;
+import com.easymall.utils.PrefixKey;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -50,16 +51,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (exist == null) {
             return "";
         }
-        String ticket = UUID.randomUUID().toString();
+        String ticket = PrefixKey.USER_LOGIN_TICKET + user.getUserId() + System.currentTimeMillis();
         String userJson = JSON.toJSONString(exist);
         //最多1个用户同时登录
         //判断当前登录用户是否已登录过
-        String oldTicket = redisTemplate.opsForValue().get(exist.getUserId());
+        String loginCheckKey = PrefixKey.USER_LOGINED_CHECK_PREFIX + exist.getUserId();
+        String oldTicket = redisTemplate.opsForValue().get(loginCheckKey);
         if (!StringUtils.isEmpty(oldTicket)) {
             //已登录过，删除旧的ticket
             redisTemplate.delete(oldTicket);
         }
-        redisTemplate.opsForValue().set(exist.getUserId(), ticket);
+        redisTemplate.opsForValue().set(loginCheckKey, ticket);
         /* //最多3个用户同时登录
         Long size = redisTemplate.opsForList().size(exist.getUserId());
         if (size != null && size >= 3) {
