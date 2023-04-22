@@ -6,7 +6,7 @@ spring:
   cloud:
     config:
       label: master
-      name: datasource,redis
+      name: datasource,feign
       discovery:
         enabled: true
         service-id: configserver

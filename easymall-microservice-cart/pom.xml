@@ -38,6 +38,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>cn.edu.scnu</groupId>
+            <artifactId>easymall-feign-api</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 </project>
