@@ -12,14 +12,17 @@ import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.easymall.pojo.User;
 import com.easymall.utils.MD5Util;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
@@ -49,6 +52,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         String ticket = UUID.randomUUID().toString();
         String userJson = JSON.toJSONString(exist);
+        //最多1个用户同时登录
+        //判断当前登录用户是否已登录过
+        String oldTicket = redisTemplate.opsForValue().get(exist.getUserId());
+        if (!StringUtils.isEmpty(oldTicket)) {
+            //已登录过，删除旧的ticket
+            redisTemplate.delete(oldTicket);
+        }
+        redisTemplate.opsForValue().set(exist.getUserId(), ticket);
+        /* //最多3个用户同时登录
+        Long size = redisTemplate.opsForList().size(exist.getUserId());
+        if (size != null && size >= 3) {
+            //已登录过，删除旧的ticket
+            String oldTicket = redisTemplate.opsForList().leftPop(exist.getUserId());
+            redisTemplate.delete(oldTicket);
+            redisTemplate.opsForList().rightPush(exist.getUserId(), ticket);
+        } else {
+            redisTemplate.opsForList().rightPush(exist.getUserId(), ticket);
+        } */
+        //将用户信息存入redis
+        log.info("user: " + exist.getUserName() + " login, ticket: " + ticket);
         redisTemplate.opsForValue().set(ticket, userJson, 5L, TimeUnit.MINUTES);
         return ticket;
     }
@@ -57,7 +80,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public String queryUserJson(String ticket) {
         String userJson;
         try {
+            Long leftTime = redisTemplate.getExpire(ticket, TimeUnit.SECONDS);
             userJson = redisTemplate.opsForValue().get(ticket);
+            if (leftTime < 60 * 5) {
+                log.info("ticket: " + ticket + " is about to expire, left time: " + leftTime + " seconds, renewing...");
+                redisTemplate.expire(ticket, leftTime + 60 * 10, TimeUnit.SECONDS);
+            }
+
             return userJson;
         } catch (Exception e) {
             e.printStackTrace();
