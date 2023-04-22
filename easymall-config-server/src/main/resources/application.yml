@@ -1,0 +1,24 @@
+server:
+  port: 11000
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/neowest/easymall-config
+#          uri: https://gitee.com/xushuona/emconfig
+          search-paths: /test
+#          search-paths: /xutest
+      label: master
+      discovery:
+        enabled: true
+        service-id: configserver
+
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        - http://localhost:8761/eureka
+        - http://localhost:8762/eureka

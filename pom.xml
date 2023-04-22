@@ -17,6 +17,8 @@
         <module>easymall-gateway</module>
         <module>easymall-microservice-pic</module>
         <module>easymall-microservice-user</module>
+        <module>easymall-config-server</module>
+        <module>easymall-config-client</module>
     </modules>
 
     <parent>
