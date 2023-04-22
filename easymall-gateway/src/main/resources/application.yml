@@ -18,6 +18,10 @@ spring:
           uri: lb://userservice
           predicates:
             - Path=/gateway-user/**
+        - id: cartservice
+          uri: lb://cartservice
+          predicates:
+            - Path=/gateway-cart/**
       default-filters: # 全局过滤器
         - StripPrefix=1
 
