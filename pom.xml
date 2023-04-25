@@ -22,6 +22,7 @@
         <module>easymall-microservice-cart</module>
         <module>easymall-feign-api</module>
         <module>easymall-microservice-order</module>
+        <module>easymall-microservice-seckill</module>
     </modules>
 
     <parent>
