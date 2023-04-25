@@ -6,19 +6,20 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://172.19.229.202:13308/easydb?&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+      url: jdbc:mysql://172.19.229.202:13308/easydb?serverTimezone=GMT%2B8&useSSL=false
       username: root
       password: abc123
-      initial-size: 5
-      max-active: 50
-      min-idle: 5
 
 mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      table-prefix: t_
 eureka:
   client:
     service-url:
-        defaultZone:
-            - http://localhost:8761/eureka
-            - http://localhost:8762/eureka
+      defaultZone:
+        - http://localhost:8761/eureka
+        - http://localhost:8762/eureka

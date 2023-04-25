@@ -2,5 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.scnu.order.mapper.OrderMapper">
+    <resultMap id="OrderRM" type="com.easymall.pojo.Order">
+        <id property="orderId" column="order_id"/>
+        <collection property="orderItems" javaType="java.util.List" ofType="com.easymall.pojo.OrderItem"
+                    column="order_id"
+                    select="queryOrderItems"/>
+    </resultMap>
+
+
+    <select id="queryMyOrder" parameterType="String" resultMap="OrderRM">
+        select *
+        from t_order
+        where user_id = #{userId}
+        order by order_time desc;
+    </select>
+    <select id="queryOrderItems" parameterType="String" resultType="com.easymall.pojo.OrderItem">
+        select *
+        from t_order_item
+        where order_id = #{orderId};
+    </select>
+
+    <insert id="saveOrder" parameterType="com.easymall.pojo.Order">
+        insert into t_order (order_id, order_money, order_paystate, order_receiverinfo, order_time, user_id)
+        values (#{orderId}, #{orderMoney}, #{orderPaystate}, #{orderReceiverinfo}, #{orderTime}, #{userId});
+    </insert>
+
+    <insert id="saveOrderItems" parameterType="com.easymall.pojo.Order">
+        insert into t_order_item (order_id, product_id, num, product_image, product_name, product_price)
+        values
+        <foreach collection="orderItems" item="item" separator=",">
+            (#{orderId}, #{item.productId}, #{item.num}, #{item.productImage}, #{item.productName},
+            #{item.productPrice})
+        </foreach>
+    </insert>
+
+
 
 </mapper>
