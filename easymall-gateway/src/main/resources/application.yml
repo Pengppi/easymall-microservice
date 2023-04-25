@@ -26,6 +26,10 @@ spring:
           uri: lb://orderservice
           predicates:
             - Path=/gateway-order/**
+        - id: seckillservice
+          uri: lb://seckillservice
+          predicates:
+            - Path=/gateway-seckill/**
       default-filters: # 全局过滤器
         - StripPrefix=1
 
