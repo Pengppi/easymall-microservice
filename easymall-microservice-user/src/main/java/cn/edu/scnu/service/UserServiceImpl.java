@@ -74,7 +74,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } */
         //将用户信息存入redis
         log.info("user: " + exist.getUserName() + " login, ticket: " + ticket);
-        redisTemplate.opsForValue().set(ticket, userJson, 5L, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(ticket, userJson, 15L, TimeUnit.MINUTES);
         return ticket;
     }
 
@@ -88,7 +88,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 log.info("ticket: " + ticket + " is about to expire, left time: " + leftTime + " seconds, renewing...");
                 redisTemplate.expire(ticket, leftTime + 60 * 10, TimeUnit.SECONDS);
             }
-
             return userJson;
         } catch (Exception e) {
             e.printStackTrace();

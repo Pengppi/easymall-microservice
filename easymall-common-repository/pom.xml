@@ -40,11 +40,6 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.2</version>
         </dependency>
-        <dependency>
-            <groupId>cn.edu.scnu</groupId>
-            <artifactId>easymall-common-resource</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
 </project>

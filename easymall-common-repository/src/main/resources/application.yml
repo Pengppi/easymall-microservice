@@ -2,7 +2,7 @@
 #  datasource:
 #    druid:
 #      driver-class-name: com.mysql.cj.jdbc.Driver
-#      url: jdbc:mysql://172.66.0.66:3306/easydb?useSSL=false
+#      url: jdbc:mysql://172.19.229.202:3306/easydb?useSSL=false
 #      username: root
 #      password: abc123
 #      max-active: 200
