@@ -1,0 +1,20 @@
+server:
+  port: 10005
+spring:
+  application:
+    name: orderservice
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://172.19.229.202:13308/easydb?&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+      username: root
+      password: abc123
+      initial-size: 5
+      max-active: 50
+      min-idle: 5
+
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
