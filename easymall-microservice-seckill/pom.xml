@@ -33,5 +33,11 @@
             <artifactId>easymall-common-resource</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>cn.edu.scnu</groupId>
+            <artifactId>easymall-common-repository</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 </project>
