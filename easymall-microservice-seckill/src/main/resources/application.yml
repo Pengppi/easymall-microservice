@@ -1,4 +1,8 @@
+server:
+  port: 10006
 spring:
+  application:
+    name: seckillservice
   rabbitmq:
     host: 172.19.229.202
     port: 5672
@@ -24,7 +28,7 @@ spring:
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
 eureka:
   client:
     service-url:

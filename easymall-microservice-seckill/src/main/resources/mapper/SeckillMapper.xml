@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.scnu.seckill.mapper.SeckillMapper">
+
+<update id="updateNum">
+    update seckill
+    set number = number - 1
+    where seckill_id = #{seckillId}
+      and start_time <![CDATA[ <= ]]> #{nowTime}
+      and end_time <![CDATA[ > ]]> #{nowTime}
+      and number &gt; 0;
+</update>
+
+</mapper>

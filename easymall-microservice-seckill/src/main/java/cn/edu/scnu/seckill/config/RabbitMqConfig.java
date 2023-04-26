@@ -11,5 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMqConfig {
-
+    public static final String exName = "seckillEx.direct";
+    public static final String qName = "seckillQueue";
+    public static final String routingKey = "seckill";
 }
