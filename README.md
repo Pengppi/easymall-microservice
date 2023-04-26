@@ -23,17 +23,17 @@ easymall 商城是一个基于微服务架构的电商平台练手项目，使�
 easymall-microservice
 ├── easymall-common-repository       通用的持久层模块，包含持久层框架的配置信息
 ├── easymall-common-resource	     通用的资源模块，包含通用工具类、pojo、vo
-├── easymall-config-client			 配置中心客户端模块，用于模拟测试从配置中心获取配置信息
-├── easymall-config-server			 配置中心服务端模块，用于集中管理项目的配置信息
-├── easymall-feign-api				 基于Feign的API模块，用于定义微服务之间的通信接口
-├── easymall-gateway				 基于SpringCloudGateway的网关模块，用于处理微服务之间的请求和路由
-├── easymall-microservice-cart		 购物车微服务模块，处理用户购物车相关的业务逻辑
+├── easymall-config-client	     配置中心客户端模块，用于模拟测试从配置中心获取配置信息
+├── easymall-config-server	     配置中心服务端模块，用于集中管理项目的配置信息
+├── easymall-feign-api		     基于Feign的API模块，用于定义微服务之间的通信接口
+├── easymall-gateway		     基于SpringCloudGateway的网关模块，用于处理微服务之间的请求和路由
+├── easymall-microservice-cart	     购物车微服务模块，处理用户购物车相关的业务逻辑
 ├── easymall-microservice-order      订单微服务模块，处理订单相关的业务逻辑
-├── easymall-microservice-pic		 图片微服务模块，处理图片相关的业务逻辑
-├── easymall-microservice-product	 商品微服务模块，处理商品相关的业务逻辑
-├── easymall-microservice-seckill  	 秒杀微服务模块，处理商品秒杀相关的业务逻辑
-├── easymall-microservice-user		 用户微服务模块，处理用户相关的业务逻辑
-└── eureka-server					 服务注册与发现模块，用于管理微服务的注册和发现
+├── easymall-microservice-pic	     图片微服务模块，处理图片相关的业务逻辑
+├── easymall-microservice-product    商品微服务模块，处理商品相关的业务逻辑
+├── easymall-microservice-seckill    秒杀微服务模块，处理商品秒杀相关的业务逻辑
+├── easymall-microservice-user	     用户微服务模块，处理用户相关的业务逻辑
+└── eureka-server		     服务注册与发现模块，用于管理微服务的注册和发现
 
 ```
 
@@ -67,7 +67,7 @@ easymall-microservice
 
 nginx.conf
 
-```json
+```text
     server{
         listen 80;
         # server_name localhost;
